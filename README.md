@@ -14,7 +14,8 @@
 # Circuit Diagram:
 
 ---
-To upload
+<img width="1038" height="686" alt="image" src="https://github.com/user-attachments/assets/a8298468-a371-4a10-aae2-13d581588099" />
+
 --
 
 # Procedure // Modify the procedure based on your circuit
@@ -58,11 +59,88 @@ Step 7: Save Your Work
 # Program
 
 ---
-To upload
+	#include<LiquidCrystal.h>
+	LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+	int tempPin = A0;// connect Sensor output pin
+	int temp;
+	#define pwm 9
+	
+	void setup()
+	{
+	 lcd.begin(16, 2);
+	  lcd.clear();
+	 lcd.print("   Fan Speed  ");
+	 lcd.setCursor(0,1);
+	 lcd.print("  Controlling ");
+	 delay(2000);
+	 analogWrite(pwm, 255);
+	 lcd.clear();
+	 lcd.print("GROUP NO 1 ");
+	 delay(2000);
+	}
+	void loop()
+	{
+	  temp = readTemp();     // read temperature
+	  lcd.setCursor(0,0);
+	  lcd.print("Temperature :");
+	  lcd.print(temp);   // Printing temperature on LCD
+	  
+	  lcd.print("oC");
+	  lcd.setCursor(0,1);
+	  if(temp <20 )
+	    { 
+	      analogWrite(9,0);
+	      lcd.print("Fan OFF ");
+	      delay(100);
+	    }
+    
+    else if(temp==24)
+    {
+      analogWrite(pwm, 75);
+      lcd.print("Fan Speed: 20%   ");
+      delay(100);
+    }
+    
+     else if(temp==27)
+    {
+      analogWrite(pwm, 102);
+      lcd.print("Fan Speed: 40%   ");
+      delay(100);
+    }
+    
+     else if(temp==30)
+    {
+      analogWrite(pwm, 153);
+      lcd.print("Fan Speed: 60%   ");
+      delay(100);
+    }
+    
+    else if(temp==34)
+    {
+      analogWrite(pwm, 204);
+      lcd.print("Fan Speed: 80%    ");
+      delay(100);
+    }
+     else if(temp>40)
+    {
+      analogWrite(pwm, 255);
+      lcd.print("Fan Speed: 100%   ");
+      delay(100);
+    } 
+	  delay(3000);
+	}
+	
+	int readTemp() {  // get temperature and convert it to celsius
+	  temp = analogRead(tempPin);
+	  return temp * 0.48828125;
+	}
 --
+# output
+
+https://github.com/user-attachments/assets/5a709e9f-719d-47ea-baf5-163e9f657bd8
 
 # Result
 
 ---
-To upload
+	Thus,the Temperature using DHT11/DHT22/TMP36 sensor with Arduino UNO Board/ESP-32 using Tinker CAD are verified.
 --

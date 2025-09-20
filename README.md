@@ -13,10 +13,9 @@
 
 # Circuit Diagram:
 
----
-<img width="1038" height="686" alt="image" src="https://github.com/user-attachments/assets/a8298468-a371-4a10-aae2-13d581588099" />
+<img width="1038" height="686" alt="FAN-SPEED-CONTROLLER-SYSTEM-USING-TEMPERATURE-SENSOR" src="https://github.com/user-attachments/assets/26a9c599-63fd-4d6c-ab2d-0603c7510573" />
 
---
+
 
 # Procedure // Modify the procedure based on your circuit
 
@@ -57,42 +56,41 @@ Step 7: Save Your Work
 
 
 # Program
+```
+#include<LiquidCrystal.h>
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+int tempPin = A0;// connect Sensor output pin
+int temp;
+#define pwm 9
 
----
-	#include<LiquidCrystal.h>
-	LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
-	int tempPin = A0;// connect Sensor output pin
-	int temp;
-	#define pwm 9
-	
-	void setup()
-	{
-	 lcd.begin(16, 2);
-	  lcd.clear();
-	 lcd.print("   Fan Speed  ");
-	 lcd.setCursor(0,1);
-	 lcd.print("  Controlling ");
-	 delay(2000);
-	 analogWrite(pwm, 255);
-	 lcd.clear();
-	 lcd.print("GROUP NO 1 ");
-	 delay(2000);
-	}
-	void loop()
-	{
-	  temp = readTemp();     // read temperature
-	  lcd.setCursor(0,0);
-	  lcd.print("Temperature :");
-	  lcd.print(temp);   // Printing temperature on LCD
-	  
-	  lcd.print("oC");
-	  lcd.setCursor(0,1);
-	  if(temp <20 )
-	    { 
-	      analogWrite(9,0);
-	      lcd.print("Fan OFF ");
-	      delay(100);
-	    }
+void setup()
+{
+ lcd.begin(16, 2);
+  lcd.clear();
+ lcd.print("   Fan Speed  ");
+ lcd.setCursor(0,1);
+ lcd.print("  Controlling ");
+ delay(2000);
+ analogWrite(pwm, 255);
+ lcd.clear();
+ lcd.print("GROUP NO 1 ");
+ delay(2000);
+}
+void loop()
+{
+  temp = readTemp();     // read temperature
+  lcd.setCursor(0,0);
+  lcd.print("Temperature :");
+  lcd.print(temp);   // Printing temperature on LCD
+  
+  lcd.print("oC");
+  lcd.setCursor(0,1);
+  if(temp <20 )
+    { 
+      analogWrite(9,0);
+      lcd.print("Fan OFF ");
+      delay(100);
+    }
     
     else if(temp==24)
     {
@@ -127,20 +125,17 @@ Step 7: Save Your Work
       lcd.print("Fan Speed: 100%   ");
       delay(100);
     } 
-	  delay(3000);
-	}
-	
-	int readTemp() {  // get temperature and convert it to celsius
-	  temp = analogRead(tempPin);
-	  return temp * 0.48828125;
-	}
---
-# output
+  delay(3000);
+}
 
-https://github.com/user-attachments/assets/5a709e9f-719d-47ea-baf5-163e9f657bd8
+int readTemp() {  // get temperature and convert it to celsius
+  temp = analogRead(tempPin);
+  return temp * 0.48828125;
+}
+```
+# Output:
 
-# Result
+https://github.com/user-attachments/assets/408df3f9-f510-47c2-b1ff-922bb1f5bbb7
 
----
-	Thus,the Temperature using DHT11/DHT22/TMP36 sensor with Arduino UNO Board/ESP-32 using Tinker CAD are verified.
---
+# Result:
+Thus,the Temperature using DHT11/DHT22/TMP36 sensor with Arduino UNO Board/ESP-32 using Tinker CAD are verified.

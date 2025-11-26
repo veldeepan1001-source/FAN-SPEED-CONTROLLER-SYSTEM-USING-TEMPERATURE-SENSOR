@@ -56,10 +56,35 @@ Step 7: Save Your Work
 
 
 # Program
+```
+const int analogIn = A0;
+int humiditysensorOutput = 0;
+int RawValue = 0;
+double Voltage = 0;
+double tempC = 0;
+double tempF = 0;
 
+void setup() {
+	Serial.begin(9600);
+	pinMode(A1, INPUT);
+ }
+
+void loop() { // Read temperature sensor RawValue = analogRead(analogIn); Voltage = (RawValue / 1023.0) * 5000; // Convert to millivolts tempC = (Voltage - 500) * 0.1; // LM35 with 500mV offset tempF = (tempC * 1.8) + 32; // Convert to Fahrenheit
+
+Serial.print("Raw Value = ");
+Serial.print(RawValue);
+Serial.print("\t Milli Volts = "); Serial.print(Voltage, 0); Serial.print("\t Temperature in C = "); Serial.print(tempC, 1); Serial.print("\t Temperature in F = "); Serial.println(tempF, 1);
+
+// Read humidity sensor humiditysensorOutput = analogRead(A1); int humidityPercent = map(humiditysensorOutput, 0, 1023, 10, 70);
+
+Serial.print("Humidity: "); Serial.print(humidityPercent); Serial.println("%");
+
+delay(5000); // iterate every 5 seconds }
+```
 ---
 To upload
---
+<img width="1310" height="598" alt="image" src="https://github.com/user-attachments/assets/13f40bed-b0f7-4941-9b8a-22f52a702991" />
+
 
 # Result
 
